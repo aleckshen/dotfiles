@@ -1,0 +1,9 @@
+[user]
+	name = aleckshen
+	email = aleckshn@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[core]
+	excludesfile = /Users/aleckshen/.gitignore_global
