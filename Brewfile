@@ -1,10 +1,9 @@
 tap "mongodb/brew"
-# Like neofetch, but much faster because written mostly in C
+tap "nikitabobko/tap"
 brew "fastfetch"
-# Distributed revision control system
 brew "git"
-# High-performance, schema-free, document-oriented database
 brew "mongodb/brew/mongodb-community@5.0"
+cask "aerospace"
 vscode "bradlc.vscode-tailwindcss"
 vscode "burkeholland.simple-react-snippets"
 vscode "esbenp.prettier-vscode"
