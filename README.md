@@ -18,6 +18,7 @@ git clone https://github.com/aleckshen/dotfiles.git
 ```zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/aerospace ~/.config/aerospace
 ```
 
 4. Install Homebrew, followed by the software listed in the Brewfile.
