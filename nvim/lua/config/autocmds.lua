@@ -23,3 +23,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+-- tree sitter auto commands
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    local ft = vim.bo.filetype
+
+    -- Map filetype to treesitter language
+    local lang = vim.treesitter.language.get_lang(ft)
+    if not lang then
+      return
+    end
+
+    -- Safely start Tree-sitter
+    pcall(vim.treesitter.start)
+
+    -- disable regex highlighting
+    vim.bo.syntax = "off"
+
+    -- enable tree-sitter indentation
+    vim.bo.indentexpr =
+      "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+

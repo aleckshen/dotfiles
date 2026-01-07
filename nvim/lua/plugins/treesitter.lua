@@ -1,10 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = false,
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
-
-  opts = {
-    ensure_installed = {
+  config = function()
+    require("nvim-treesitter").setup()
+    require("nvim-treesitter").install({
       "bash",
       "c",
       "cpp",
@@ -23,14 +23,6 @@ return {
       "typescript",
       "vue",
       "yaml",
-    },
-    auto_install = true,
-    sync_install = false,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
-  },
+    })
+  end,
 }
-
