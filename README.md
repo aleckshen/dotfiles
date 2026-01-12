@@ -21,6 +21,7 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/aerospace ~/.config/aerospace
 ln -s ~/dotfiles/wezterm ~/.config/wezterm
 ln -s ~/dotfiles/nvim ~/.config/nvim
+ln -s ~/dotfiles/tmux ~/.config/tmux
 ```
 
 4. Install Homebrew, followed by the software listed in the Brewfile.
