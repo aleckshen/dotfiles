@@ -6,7 +6,7 @@ vim.opt.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.opt.sidescrolloff = 8 -- keep 8 columns left/right of cursor
 vim.opt.wrap = false -- don't wrap lines
 vim.opt.cmdheight = 1 -- command line height
-vim.opt.spelllang = { "en", "de" } -- language for spellchecking 
+vim.opt.spelllang = { "en", "de" } -- language for spellchecking
 
 -- tabbing/indentation
 vim.opt.tabstop = 4 -- tab width
@@ -43,11 +43,11 @@ vim.opt.synmaxcol = 300 -- syntax highlighting column limit
 vim.opt.backup = false -- don't create backup files
 vim.opt.writebackup = false -- don't backup before overwriting
 vim.opt.swapfile = false -- don't create swap files
-vim.opt.undofile = true -- persistent undo 
+vim.opt.undofile = true -- persistent undo
 vim.opt.updatetime = 300 -- time in ms to trigger cursor hold
 vim.opt.timeoutlen = 500 -- time in ms to wait for mapped sequence
 vim.opt.ttimeoutlen = 0 -- no wait for key code sequences
-vim.opt.autoread = true -- auto-reload file if changed outside 
+vim.opt.autoread = true -- auto-reload file if changed outside
 vim.opt.autowrite = false -- don't auto-save on some events
 vim.opt.diffopt:append("vertical") -- vertical diff splits
 vim.opt.diffopt:append("algorithm:patience") -- better diff algorithm
@@ -58,10 +58,10 @@ local undodir = "~/.local/share/nvim/undodir" -- undo directory path
 vim.opt.undodir = vim.fn.expand(undodir) -- expand to full path
 local undodir_path = vim.fn.expand(undodir)
 if vim.fn.isdirectory(undodir_path) == 0 then
-    vim.fn.mkdir(undodir_path, "p") -- create if it doesn't exist
+	vim.fn.mkdir(undodir_path, "p") -- create if it doesn't exist
 end
 
--- behavior settings 
+-- behavior settings
 vim.opt.errorbells = false -- disable error sounds
 vim.opt.backspace = "indent,eol,start" -- make backspace behave naturally
 vim.opt.autochdir = false -- don't change directory automatically
@@ -69,7 +69,6 @@ vim.opt.iskeyword:append("-") -- treat dash as part of a word
 vim.opt.path:append("**") -- search into subfolder with 'gf'
 vim.opt.selection = "inclusive" -- use inclusive selection
 vim.opt.mouse = "a" -- enable mouse support
-vim.opt.clipboard:append("unnamedplus") -- use system clipboard
 vim.opt.modifiable = true -- allow editing buffers
 vim.opt.encoding = "UTF-8" -- use UTF-8 encoding
 vim.opt.wildmenu = true -- enable command-line completion menu
