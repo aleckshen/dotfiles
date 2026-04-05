@@ -30,3 +30,6 @@ brew() {
     echo "Brewfile automatically updated!"
   fi
 }
+
+# --- LOCAL USER BIN ---
+export PATH="$HOME/.local/bin:$PATH"
