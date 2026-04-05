@@ -1,7 +1,7 @@
 local M = {}
 
 M.on_attach = function(event)
-	local client = vim.lsp.get_client_by_id(event.client_id)
+	local client = vim.lsp.get_client_by_id(event.data.client_id)
 	if not client then
 		return
 	end
