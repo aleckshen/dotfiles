@@ -5,6 +5,12 @@ return {
 		config = function()
 			local lint = require("lint")
 
+			local luacheck = require("lint").linters.luacheck
+			luacheck.args = vim.list_extend(
+				{ "--globals", "vim", "--" },
+				luacheck.args or {}
+			)
+
 			lint.linters_by_ft = {
 				lua = { "luacheck" },
 				python = { "ruff" },
