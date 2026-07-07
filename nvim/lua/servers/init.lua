@@ -1,26 +1,8 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- language server protocol (LSP)
-require("servers.bashls")(capabilities)
-require("servers.clangd")(capabilities)
-require("servers.dockerls")(capabilities)
-require("servers.emmet_ls")(capabilities)
-require("servers.gopls")(capabilities)
-require("servers.jsonls")(capabilities)
-require("servers.lua_ls")(capabilities)
-require("servers.pyright")(capabilities)
-require("servers.tailwindcss")(capabilities)
-require("servers.ts_ls")(capabilities)
-
-vim.lsp.enable({
-	"bashls",
-	"clangd",
-	"dockerls",
-	"emmet_ls",
-	"gopls",
-	"jsonls",
-	"lua_ls",
-	"pyright",
-	"tailwindcss",
-	"ts_ls",
-})
+-- per-server LSP overrides; shared capabilities come from vim.lsp.config("*")
+-- installation and enabling are handled by mason-lspconfig
+require("servers.clangd")
+require("servers.emmet_ls")
+require("servers.lua_ls")
+require("servers.pyright")
+require("servers.tailwindcss")
+require("servers.ts_ls")
