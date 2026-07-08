@@ -21,9 +21,11 @@ return {
 			ensure_installed = {
 				"bashls",
 				"clangd",
+				"cssls",
 				"dockerls",
 				"emmet_ls",
 				"gopls",
+				"html",
 				"jsonls",
 				"lua_ls",
 				"pyright",
