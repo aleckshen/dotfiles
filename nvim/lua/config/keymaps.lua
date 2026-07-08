@@ -8,11 +8,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "half page up (centered)" })
 vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "next buffer" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "previous buffer" })
 
--- better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "move to bottom window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "move to top window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "move to right window" })
+-- window navigation (<C-h/j/k/l>) is handled by vim-tmux-navigator
 
 -- splitting & resizing
 vim.keymap.set("n", "<leader>sv", "<Cmd>vsplit<CR>", { desc = "split window vertically" })
