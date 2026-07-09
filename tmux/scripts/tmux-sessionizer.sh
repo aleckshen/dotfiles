@@ -11,7 +11,17 @@ else
     selected=$( {
         echo "$HOME/dotfiles"
         find ~/dotfiles ~/Documents -mindepth 1 -maxdepth 1 -type d -not -name '.*'
-    } | fzf --reverse)
+    } | fzf \
+        --reverse \
+        --border=rounded \
+        --border-label=" aleck's sessionizer " \
+        --border-label-pos=center \
+        --prompt='  ' \
+        --pointer='▶' \
+        --header='enter: open / switch session' \
+        --preview='tree -C -L 2 {} 2>/dev/null || ls -la {}' \
+        --preview-window='right,55%,border-left' \
+        --color='bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1')
 fi
 
 # nothing selected (fzf cancelled) -> quit
