@@ -7,8 +7,9 @@ return {
 
         require("nvim-tree").setup({
             filters = {
-                dotfiles = false,   -- Show hidden files (dotfiles)
-                git_ignored = true, -- Hide git-ignored files (e.g. .DS_Store) by default; toggle with Shift+I
+                dotfiles = false,             -- show all dotfiles (.env, .gitignore, etc.)
+                git_ignored = false,          -- show git-ignored files
+                custom = { "^\\.DS_Store$" }, -- always hide only .DS_Store
             },
             view = {
                 adaptive_size = true,
