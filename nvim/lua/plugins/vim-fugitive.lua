@@ -4,6 +4,5 @@ return {
     vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
     vim.keymap.set("n", "<leader>gl", "<Cmd>Git log<CR>")
     vim.keymap.set("n", "<leader>gw", "<Cmd>Git blame<CR>")
-    vim.keymap.set("n", "<leader>gd", "<Cmd>Gvdiffsplit<CR>")
   end,
 }
