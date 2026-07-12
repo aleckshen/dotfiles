@@ -1,4 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	opts = {},
+	opts = {
+		attach_to_untracked = true,
+	},
 }
