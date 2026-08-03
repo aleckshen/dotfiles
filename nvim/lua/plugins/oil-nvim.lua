@@ -14,4 +14,16 @@ return {
 			end,
 		},
 	},
+	config = function(_, opts)
+		require("oil").setup(opts)
+
+		-- oil's save-confirmation popup only binds y/Y/o/O to confirm and
+		-- n/N/c/C/q/<Esc>/<C-c> to cancel; add <CR> as a closer confirm key
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "oil_preview",
+			callback = function(args)
+				vim.keymap.set("n", "<CR>", "y", { buffer = args.buf, remap = true })
+			end,
+		})
+	end,
 }
