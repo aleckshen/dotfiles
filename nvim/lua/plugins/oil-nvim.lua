@@ -9,6 +9,9 @@ return {
 	opts = {
 		view_options = {
 			show_hidden = true,
+			is_always_hidden = function(name)
+				return name == ".DS_Store"
+			end,
 		},
 	},
 }
