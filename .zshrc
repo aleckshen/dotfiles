@@ -1,6 +1,7 @@
 # --- ALIASES ---
 alias v="nvim ."
 alias cc="claude --dangerously-skip-permissions"
+alias ..="cd .."
 
 # --- POWERLEVEL10 ---
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
