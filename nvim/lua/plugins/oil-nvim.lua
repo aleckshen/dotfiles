@@ -13,6 +13,10 @@ return {
 				return name == ".DS_Store"
 			end,
 		},
+		keymaps = {
+			["q"] = "actions.close",
+			["<C-c>"] = false,
+		},
 	},
 	config = function(_, opts)
 		require("oil").setup(opts)
