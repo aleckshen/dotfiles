@@ -16,6 +16,7 @@ return {
 		keymaps = {
 			["q"] = "actions.close",
 			["<C-c>"] = false,
+			["<C-l>"] = false,
 		},
 	},
 	config = function(_, opts)
