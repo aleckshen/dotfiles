@@ -17,6 +17,7 @@ return {
 			["q"] = "actions.close",
 			["<C-c>"] = false,
 			["<C-l>"] = false,
+			["<C-h>"] = false,
 		},
 	},
 	config = function(_, opts)
