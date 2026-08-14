@@ -13,6 +13,7 @@ return {
 				"shfmt",
 				"gofumpt",
 				"clang-format",
+				"csharpier",
 				-- linters (nvim-lint)
 				"eslint_d",
 				"ruff",

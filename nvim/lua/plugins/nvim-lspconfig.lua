@@ -21,6 +21,7 @@ return {
 			ensure_installed = {
 				"bashls",
 				"clangd",
+				"omnisharp",
 				"cssls",
 				"dockerls",
 				"emmet_ls",

@@ -25,6 +25,7 @@ return {
 					go = { "gofumpt" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
+					cs = { "csharpier" },
 				},
 			})
 		end,
