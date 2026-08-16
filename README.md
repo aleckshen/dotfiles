@@ -20,6 +20,7 @@ ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/aerospace ~/.config/aerospace
 ln -s ~/dotfiles/wezterm ~/.config/wezterm
+ln -s ~/dotfiles/ghostty ~/.config/ghostty
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/tmux ~/.config/tmux
 ```
