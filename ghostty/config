@@ -3,6 +3,9 @@ font-size = 15
 
 macos-titlebar-style = hidden
 
+window-padding-x = 9
+window-padding-y = 9
+
 background = #2E3440
 foreground = #D8DEE9
 cursor-color = #88C0D0
