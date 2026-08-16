@@ -26,44 +26,43 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- tree sitter auto commands
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    local ft = vim.bo.filetype
+	callback = function()
+		local ft = vim.bo.filetype
 
-    -- Map filetype to treesitter language
-    local lang = vim.treesitter.language.get_lang(ft)
-    if not lang then
-      return
-    end
+		-- Map filetype to treesitter language
+		local lang = vim.treesitter.language.get_lang(ft)
+		if not lang then
+			return
+		end
 
-    -- Safely start Tree-sitter
-    pcall(vim.treesitter.start)
+		-- Safely start Tree-sitter
+		pcall(vim.treesitter.start)
 
-    -- disable regex highlighting
-    vim.bo.syntax = "off"
+		-- disable regex highlighting
+		vim.bo.syntax = "off"
 
-    -- enable tree-sitter indentation
-    vim.bo.indentexpr =
-      "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
+		-- enable tree-sitter indentation
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })
 
 -- format on save using efm langserver and configured formatters
 local lsp_fmt_group = vim.api.nvim_create_augroup("FormatOnSaveGroup", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = lsp_fmt_group,
-    callback = function()
-        local efm = vim.lsp.get_clients({ name = "efm" })
-        if vim.tbl_isempty(efm) then
-            return
-        end
-        vim.lsp.buf.format({ name = "efm", async = true })
-    end,
+	group = lsp_fmt_group,
+	callback = function()
+		local efm = vim.lsp.get_clients({ name = "efm" })
+		if vim.tbl_isempty(efm) then
+			return
+		end
+		vim.lsp.buf.format({ name = "efm", async = true })
+	end,
 })
 
 -- on attach function shortcuts
 local on_attach = require("utils.lsp").on_attach
 local lsp_on_attach_group = vim.api.nvim_create_augroup("LspMappings", {})
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = lsp_on_attach_group,
-    callback = on_attach,
+	group = lsp_on_attach_group,
+	callback = on_attach,
 })
