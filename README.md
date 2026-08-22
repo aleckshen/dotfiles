@@ -1,6 +1,19 @@
-# Dotfiles installation
+# dotfiles
 
-## Steps to bootstrap a new Mac
+> My personal development environment for macOS.
+
+A terminal-centric, keyboard-driven setup:
+
+- **AeroSpace** — i3-like tiling window manager for macOS
+- **Ghostty** — fast, GPU-accelerated, native terminal emulator
+- **Zsh** — shell with a Powerlevel10k prompt
+- **tmux** — terminal multiplexer
+- **Neovim** — terminal-based code editor
+
+## Installation
+
+### Steps to bootstrap a new Mac
+
 1. Install Apple's command line tools, which are prerequisites for Git and Homebrew.
 
 ```zsh
@@ -33,4 +46,10 @@ ln -s ~/dotfiles/tmux ~/.config/tmux
 
 # Pass in file Brewfile location
 brew bundle --file ~/dotfiles/Brewfile
+```
+
+Steps 3 and 4 (plus the Xcode CLT check from step 1) are also available as a single script, `install.sh`, once the repo is cloned:
+
+```zsh
+~/dotfiles/install.sh
 ```
