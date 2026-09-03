@@ -32,6 +32,7 @@ link() {
 mkdir -p "$HOME/.config"
 
 link "$DOTFILES/.zshrc" "$HOME/.zshrc"
+link "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
 link "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
 link "$DOTFILES/aerospace" "$HOME/.config/aerospace"
 link "$DOTFILES/wezterm" "$HOME/.config/wezterm"
@@ -39,7 +40,25 @@ link "$DOTFILES/ghostty" "$HOME/.config/ghostty"
 link "$DOTFILES/nvim" "$HOME/.config/nvim"
 link "$DOTFILES/tmux" "$HOME/.config/tmux"
 
-# 4. Claude Code config lives in its own repo, cloned in place rather than
+# 4. Bootstrap TPM, then let it install the plugins listed in tmux.conf.
+# The plugins themselves are gitignored, so this is what populates tmux/plugins.
+TPM_DIR="$DOTFILES/tmux/plugins/tpm"
+if [ -d "$TPM_DIR/.git" ]; then
+  echo "already cloned: $TPM_DIR"
+else
+  echo "Cloning TPM..."
+  rm -rf "$TPM_DIR"
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+fi
+
+# install_plugins reads TMUX_PLUGIN_MANAGER_PATH from a tmux server, so start one
+# and source the config first. Without this it silently installs nothing.
+echo "Installing tmux plugins..."
+tmux start-server
+tmux source-file "$HOME/.config/tmux/tmux.conf"
+"$TPM_DIR/bin/install_plugins"
+
+# 5. Claude Code config lives in its own repo, cloned in place rather than
 # symlinked: ~/.claude is mostly runtime state (sessions, history, caches) that
 # the repo's allowlist .gitignore keeps untracked.
 CLAUDE_REPO="https://github.com/aleckshen/.claude.git"
@@ -60,7 +79,7 @@ else
   echo "cloned $HOME/.claude"
 fi
 
-# 5. Install Homebrew, then the software listed in the Brewfile
+# 6. Install Homebrew, then the software listed in the Brewfile
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
