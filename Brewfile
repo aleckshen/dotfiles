@@ -40,6 +40,8 @@ brew "tree-sitter-cli"
 brew "mongodb/brew/mongodb-community@5.0", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace", trusted: true
+# App to build and share containerised applications and microservices
+cask "docker-desktop"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
