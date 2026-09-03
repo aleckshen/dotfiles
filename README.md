@@ -13,7 +13,20 @@ A terminal-centric, keyboard-driven setup:
 
 ## Installation
 
-### Steps to bootstrap a new Mac
+### Quick start
+
+```zsh
+git clone https://github.com/aleckshen/dotfiles.git ~/dotfiles
+~/dotfiles/install.sh
+```
+
+That is the whole bootstrap. `install.sh` runs steps 3 to 6 below, plus the
+Xcode command line tools check from step 1, and is safe to re-run — it skips
+anything already in place.
+
+### Manual steps
+
+The same bootstrap done by hand, for reference or for running only part of it.
 
 1. Install Apple's command line tools, which are prerequisites for Git and Homebrew.
 
@@ -73,10 +86,4 @@ handles that case by cloning alongside and moving `.git` into place.
 
 # Pass in file Brewfile location
 brew bundle --file ~/dotfiles/Brewfile
-```
-
-Steps 3 to 6 (plus the Xcode CLT check from step 1) are also available as a single script, `install.sh`, once the repo is cloned:
-
-```zsh
-~/dotfiles/install.sh
 ```
