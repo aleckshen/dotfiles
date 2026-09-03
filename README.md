@@ -9,6 +9,7 @@ A terminal-centric, keyboard-driven setup:
 - **Zsh** — shell with a Powerlevel10k prompt
 - **tmux** — terminal multiplexer
 - **Neovim** — terminal-based code editor
+- **Claude Code** — agentic coding assistant, configured in [aleckshen/.claude](https://github.com/aleckshen/.claude)
 
 ## Installation
 
@@ -38,7 +39,18 @@ ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/tmux ~/.config/tmux
 ```
 
-4. Install Homebrew, followed by the software listed in the Brewfile.
+4. Clone the Claude Code config. It lives in its own repo and is cloned in place
+   rather than symlinked, because `~/.claude` also holds runtime state (sessions,
+   history, caches) that stays untracked.
+
+```zsh
+git clone https://github.com/aleckshen/.claude.git ~/.claude
+```
+
+If `~/.claude` already exists, `git` will refuse to clone into it — `install.sh`
+handles that case by cloning alongside and moving `.git` into place.
+
+5. Install Homebrew, followed by the software listed in the Brewfile.
 
 ```zsh
 # Install Homebrew
@@ -48,7 +60,7 @@ ln -s ~/dotfiles/tmux ~/.config/tmux
 brew bundle --file ~/dotfiles/Brewfile
 ```
 
-Steps 3 and 4 (plus the Xcode CLT check from step 1) are also available as a single script, `install.sh`, once the repo is cloned:
+Steps 3 to 5 (plus the Xcode CLT check from step 1) are also available as a single script, `install.sh`, once the repo is cloned:
 
 ```zsh
 ~/dotfiles/install.sh
