@@ -6,9 +6,11 @@ return {
 		"nvim-mini/mini.notify",
 		version = "*",
 		-- Neovim's floating-window border/title row hard-fills its background
-		-- rather than truly passing it through, even once FloatTitle/FloatBorder
-		-- are cleared, so with terminal transparency on it renders as an ugly
-		-- solid bar. Dropping the border removes that row entirely.
-		opts = { window = { config = { border = "none" } } },
+		-- with an unrelated near-black colour rather than passing it through,
+		-- even once FloatBorder/FloatTitle are cleared and regardless of border
+		-- style. winblend forces the row into nvim's own blend compositing
+		-- instead, which resolves it to a real nord colour. The body text isn't
+		-- affected and stays genuinely transparent.
+		opts = { window = { winblend = 100 } },
 	}, -- shows notification in floating window
 }
