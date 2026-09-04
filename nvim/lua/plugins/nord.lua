@@ -6,7 +6,7 @@ return {
 		config = function()
 			require("nord").setup({
 				-- optional settings
-				transparent = false,
+				transparent = true,
 				terminal_colors = true,
 			})
 
