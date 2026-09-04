@@ -7,9 +7,11 @@ if [[ $# -eq 1 ]]; then
     # a path was passed directly on the command line (skip the picker)
     selected=$1
 else
-    # pick a project: ~/dotfiles itself + its subfolders, plus ~/Documents and ~/dev subfolders
+    # pick a project: ~/dotfiles and ~/.claude themselves + their subfolders,
+    # plus ~/Documents and ~/dev subfolders
     selected=$( {
         echo "$HOME/dotfiles"
+        echo "$HOME/.claude"
         find ~/dotfiles ~/Documents ~/dev -mindepth 1 -maxdepth 1 -type d -not -name '.*'
     } | fzf \
         --reverse \
