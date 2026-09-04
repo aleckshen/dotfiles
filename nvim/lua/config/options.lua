@@ -38,6 +38,7 @@ vim.opt.lazyredraw = false -- redraw while executing macros (better ux)
 vim.opt.redrawtime = 10000 -- timeout for syntax highlighting redraw
 vim.opt.maxmempattern = 20000 -- max memory for pattern matching
 vim.opt.synmaxcol = 300 -- syntax highlighting column limit
+vim.opt.winborder = "rounded"
 
 -- file handling
 vim.opt.backup = false -- don't create backup files
