@@ -11,6 +11,12 @@ return {
 			})
 
 			vim.cmd.colorscheme("nord")
+			-- nord.nvim's transparent option skips floating windows and
+			-- notifications (they're wired to a bg that ignores it upstream),
+			-- so clear those backgrounds by hand.
+			for _, group in ipairs({ "NormalFloat", "FloatBorder", "FloatTitle", "NotifyBackground" }) do
+				vim.api.nvim_set_hl(0, group, { bg = "none" })
+			end
 		end,
 	},
 }
