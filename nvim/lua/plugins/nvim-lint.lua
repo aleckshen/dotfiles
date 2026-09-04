@@ -6,10 +6,7 @@ return {
 			local lint = require("lint")
 
 			local luacheck = require("lint").linters.luacheck
-			luacheck.args = vim.list_extend(
-				{ "--globals", "vim", "--" },
-				luacheck.args or {}
-			)
+			luacheck.args = vim.list_extend({ "--globals", "vim", "--" }, luacheck.args or {})
 
 			lint.linters_by_ft = {
 				lua = { "luacheck" },
@@ -26,7 +23,8 @@ return {
 				cpp = { "clangtidy" },
 			}
 
-			local eslint_fts = { javascript = true, typescript = true, javascriptreact = true, typescriptreact = true, json = true }
+			local eslint_fts =
+				{ javascript = true, typescript = true, javascriptreact = true, typescriptreact = true, json = true }
 
 			vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave" }, {
 				callback = function()
@@ -36,9 +34,15 @@ return {
 							return
 						end
 						local config = vim.fs.find({
-							".eslintrc", ".eslintrc.js", ".eslintrc.cjs",
-							".eslintrc.yaml", ".eslintrc.yml", ".eslintrc.json",
-							"eslint.config.js", "eslint.config.mjs", "eslint.config.cjs",
+							".eslintrc",
+							".eslintrc.js",
+							".eslintrc.cjs",
+							".eslintrc.yaml",
+							".eslintrc.yml",
+							".eslintrc.json",
+							"eslint.config.js",
+							"eslint.config.mjs",
+							"eslint.config.cjs",
 						}, { path = vim.api.nvim_buf_get_name(0), upward = true })[1]
 						if not config then
 							return

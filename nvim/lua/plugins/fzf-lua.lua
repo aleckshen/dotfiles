@@ -1,8 +1,8 @@
 return {
-    "ibhagwan/fzf-lua",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
+	"ibhagwan/fzf-lua",
+	lazy = false,
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	keys = {
 		{
 			"<leader>ff",
 			function()
