@@ -23,7 +23,7 @@ else
         --header='enter: open / switch session' \
         --preview='tree -C -L 2 {} 2>/dev/null || ls -la {}' \
         --preview-window='right,55%,border-left' \
-        --color='bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1')
+        --color='bg+:#3B4252,bg:-1,spinner:#81A1C1,hl:#616E88,fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1,marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1')
 fi
 
 # nothing selected (fzf cancelled) -> quit
