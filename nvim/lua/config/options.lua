@@ -31,7 +31,12 @@ vim.opt.showmatch = true -- highlight matching brackets
 vim.opt.matchtime = 2 -- how long to show matching brackets
 vim.opt.completeopt = "menuone,noinsert,noselect" -- completion options
 vim.opt.pumheight = 10 -- popup menu height
-vim.opt.pumblend = 10 -- popup menu transparency
+-- 0, not blended: pumblend is nvim's own internal blend compositing, which
+-- needs a real colour to blend against. Now that Pmenu's bg is cleared
+-- (nord.lua) for true terminal-level transparency, a nonzero value here
+-- blends toward black instead and bleeds buffer text through as a black
+-- tint. winblend below is already 0 for the same reason.
+vim.opt.pumblend = 0 -- popup menu transparency
 vim.opt.winblend = 0 -- floating window transparency
 vim.opt.conceallevel = 0 -- don't hide markup
 vim.opt.lazyredraw = false -- redraw while executing macros (better ux)
