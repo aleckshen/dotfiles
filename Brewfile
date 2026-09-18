@@ -46,6 +46,8 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Tool for remapping keyboard modifiers and creating complex key mappings
+cask "karabiner-elements"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 vscode "anthropic.claude-code"

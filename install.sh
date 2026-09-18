@@ -39,6 +39,7 @@ link "$DOTFILES/wezterm" "$HOME/.config/wezterm"
 link "$DOTFILES/ghostty" "$HOME/.config/ghostty"
 link "$DOTFILES/nvim" "$HOME/.config/nvim"
 link "$DOTFILES/tmux" "$HOME/.config/tmux"
+link "$DOTFILES/karabiner" "$HOME/.config/karabiner"
 
 # 4. Bootstrap TPM, then let it install the plugins listed in tmux.conf.
 # The plugins themselves are gitignored, so this is what populates tmux/plugins.
