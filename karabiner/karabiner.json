@@ -8,34 +8,40 @@
     {
       "name": "Default",
       "selected": true,
-      "simple_modifications": [
-        {
-          "from": {
-            "key_code": "caps_lock"
-          },
-          "to": [
-            {
-              "key_code": "left_control"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "left_control"
-          },
-          "to": [
-            {
-              "key_code": "caps_lock"
-            }
-          ]
-        }
-      ],
       "complex_modifications": {
-        "rules": []
+        "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 50,
+          "basic.to_delayed_action_delay_milliseconds": 500,
+          "basic.to_if_alone_timeout_milliseconds": 1000,
+          "basic.to_if_held_down_threshold_milliseconds": 500
+        },
+        "rules": [
+          {
+            "description": "Caps Lock: tap = Escape, hold = Control (Right Control untouched)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "left_control" }],
+                "to_if_alone": [{ "key_code": "escape" }]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "left_control",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "caps_lock" }]
+              }
+            ]
+          }
+        ]
       },
-      "virtual_hid_keyboard": {
-        "keyboard_type_v2": "ansi"
-      }
+      "devices": [],
+      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
     }
   ]
 }
