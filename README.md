@@ -10,6 +10,7 @@ A terminal-centric, keyboard-driven setup:
 - **tmux** — terminal multiplexer
 - **Neovim** — terminal-based code editor
 - **Karabiner-Elements** — keyboard remapping
+- **Mise** — polyglot runtime version manager
 - **Claude Code** — agentic coding assistant, configured in [aleckshen/.claude](https://github.com/aleckshen/.claude)
 
 ## Installation
@@ -66,6 +67,7 @@ ln -s ~/dotfiles/ghostty ~/.config/ghostty
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/tmux ~/.config/tmux
 ln -s ~/dotfiles/karabiner ~/.config/karabiner
+ln -s ~/dotfiles/mise ~/.config/mise
 ```
 
 5. Install the tmux plugins. They are not tracked in this repo — TPM owns them,
