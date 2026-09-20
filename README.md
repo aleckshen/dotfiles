@@ -9,6 +9,7 @@ A terminal-centric, keyboard-driven setup:
 - **Zsh** — shell with a Powerlevel10k prompt
 - **tmux** — terminal multiplexer
 - **Neovim** — terminal-based code editor
+- **Karabiner-Elements** — keyboard remapping
 - **Claude Code** — agentic coding assistant, configured in [aleckshen/.claude](https://github.com/aleckshen/.claude)
 
 ## Installation
@@ -40,7 +41,20 @@ xcode-select --install
 git clone https://github.com/aleckshen/dotfiles.git
 ```
 
-3. Create symlinks in the home directory to the real files in the repo.
+3. Install Homebrew, then the software listed in the Brewfile.
+
+```zsh
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Put brew on PATH — the installer only updates future shells via .zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Pass in file Brewfile location
+brew bundle --file ~/dotfiles/Brewfile
+```
+
+4. Create symlinks in the home directory to the real files in the repo.
 
 ```zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
@@ -51,9 +65,10 @@ ln -s ~/dotfiles/wezterm ~/.config/wezterm
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/tmux ~/.config/tmux
+ln -s ~/dotfiles/karabiner ~/.config/karabiner
 ```
 
-4. Install the tmux plugins. They are not tracked in this repo — TPM owns them,
+5. Install the tmux plugins. They are not tracked in this repo — TPM owns them,
    and the `tmux/plugins/` directory is gitignored.
 
 ```zsh
@@ -67,7 +82,7 @@ The `start-server` and `source-file` steps matter: `install_plugins` reads its
 install path from a running tmux server, and without one it reports success
 while installing nothing.
 
-5. Clone the Claude Code config. It lives in its own repo and is cloned in place
+6. Clone the Claude Code config. It lives in its own repo and is cloned in place
    rather than symlinked, because `~/.claude` also holds runtime state (sessions,
    history, caches) that stays untracked.
 
@@ -77,13 +92,3 @@ git clone https://github.com/aleckshen/.claude.git ~/.claude
 
 If `~/.claude` already exists, `git` will refuse to clone into it — `install.sh`
 handles that case by cloning alongside and moving `.git` into place.
-
-6. Install Homebrew, followed by the software listed in the Brewfile.
-
-```zsh
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Pass in file Brewfile location
-brew bundle --file ~/dotfiles/Brewfile
-```
