@@ -19,6 +19,9 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # --- MONGODB ---
 export PATH="/opt/homebrew/opt/mongodb-community@5.0/bin:$PATH"
 
+# --- MISE ---
+eval "$(mise activate zsh)"
+
 # --- NODE VERSION MANAGER ---
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -27,10 +30,24 @@ export NVM_DIR="$HOME/.nvm"
 # --- BREWFILE AUTOUPDATE ---
 brew() {
   command brew "$@"
-  if [[ "$1" == "install" || "$1" == "uninstall" || "$1" == "remove" ]]; then
-    brew bundle dump --force --file="$HOME/dotfiles/Brewfile" >/dev/null
-    echo "Brewfile automatically updated!"
-  fi
+  local cmd="$1" type="brew" brewfile="$HOME/dotfiles/Brewfile" names=()
+  [[ "$cmd" == "install" || "$cmd" == "uninstall" || "$cmd" == "remove" ]] || return
+  shift
+  for arg in "$@"; do
+    case "$arg" in
+      --cask) type="cask" ;;
+      -*) ;;
+      *) names+=("$arg") ;;
+    esac
+  done
+  for name in "${names[@]}"; do
+    if [[ "$cmd" == "install" ]]; then
+      grep -qF "\"$name\"" "$brewfile" || { echo "$type \"$name\"" >>"$brewfile"; echo "Added $type \"$name\" to Brewfile"; }
+    else
+      sed -i '' -E "/^(brew|cask) \"$name\"/d" "$brewfile"
+      echo "Removed $name from Brewfile"
+    fi
+  done
 }
 
 # --- LOCAL USER BIN ---
