@@ -11,10 +11,24 @@ if ! xcode-select -p &>/dev/null; then
   exit 0
 fi
 
-# 2. This script assumes the repo is already cloned to ~/dotfiles:
-#      git clone https://github.com/aleckshen/dotfiles.git ~/dotfiles
+# 2. Assumes the repo is already cloned: git clone https://github.com/aleckshen/dotfiles.git ~/dotfiles
 
-# 3. Symlink dotfiles into place
+# 3. Install Homebrew and the Brewfile first, since tmux (needed by the TPM step below) comes from it
+if ! command -v brew &>/dev/null; then
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# put brew on PATH for this script; the installer only updates future shells via .zprofile
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+brew bundle --file "$DOTFILES/Brewfile"
+
+# 4. Symlink dotfiles into place
 link() {
   local target="$1" link_path="$2"
   if [ -L "$link_path" ] && [ "$(readlink "$link_path")" = "$target" ]; then
@@ -41,8 +55,7 @@ link "$DOTFILES/nvim" "$HOME/.config/nvim"
 link "$DOTFILES/tmux" "$HOME/.config/tmux"
 link "$DOTFILES/karabiner" "$HOME/.config/karabiner"
 
-# 4. Bootstrap TPM, then let it install the plugins listed in tmux.conf.
-# The plugins themselves are gitignored, so this is what populates tmux/plugins.
+# 5. Bootstrap TPM, then let it install the gitignored plugins listed in tmux.conf
 TPM_DIR="$DOTFILES/tmux/plugins/tpm"
 if [ -d "$TPM_DIR/.git" ]; then
   echo "already cloned: $TPM_DIR"
@@ -52,24 +65,19 @@ else
   git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
 fi
 
-# install_plugins reads TMUX_PLUGIN_MANAGER_PATH from a tmux server, so start one
-# and source the config first. Without this it silently installs nothing.
+# install_plugins reads TMUX_PLUGIN_MANAGER_PATH from a tmux server, so start one and source the config first
 echo "Installing tmux plugins..."
 tmux start-server
 tmux source-file "$HOME/.config/tmux/tmux.conf"
 "$TPM_DIR/bin/install_plugins"
 
-# 5. Claude Code config lives in its own repo, cloned in place rather than
-# symlinked: ~/.claude is mostly runtime state (sessions, history, caches) that
-# the repo's allowlist .gitignore keeps untracked.
+# 6. Claude Code config lives in its own repo, cloned in place since ~/.claude is mostly untracked runtime state
 CLAUDE_REPO="https://github.com/aleckshen/.claude.git"
 if [ -d "$HOME/.claude/.git" ]; then
   echo "already cloned: $HOME/.claude"
 else
-  # ~/.claude usually already exists (Claude Code creates it on first run), and
-  # git refuses to clone into a non-empty directory, so clone alongside and move
-  # the .git directory into place. The checkout then overwrites any tracked file
-  # already sitting there with the committed version.
+  # ~/.claude already exists (Claude Code creates it on first run) and git won't clone into a non-empty dir,
+  # so clone alongside, move the .git dir into place, then checkout overwrites tracked files with the committed version
   echo "Cloning Claude Code config..."
   rm -rf "$HOME/.claude.tmp"
   git clone "$CLAUDE_REPO" "$HOME/.claude.tmp"
@@ -79,13 +87,5 @@ else
   git -C "$HOME/.claude" checkout -- .
   echo "cloned $HOME/.claude"
 fi
-
-# 6. Install Homebrew, then the software listed in the Brewfile
-if ! command -v brew &>/dev/null; then
-  echo "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-brew bundle --file "$DOTFILES/Brewfile"
 
 echo "Done."
