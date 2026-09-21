@@ -1,3 +1,7 @@
+# --- COMPLETION ---
+autoload -Uz compinit
+compinit
+
 # --- ALIASES ---
 alias v="nvim ."
 alias cc="claude --dangerously-skip-permissions"
@@ -20,7 +24,7 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 export PATH="/opt/homebrew/opt/mongodb-community@5.0/bin:$PATH"
 
 # --- MISE ---
-eval "$(mise activate zsh)"
+command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"
 
 # --- BREWFILE AUTOUPDATE ---
 brew() {
