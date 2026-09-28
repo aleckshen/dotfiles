@@ -26,6 +26,9 @@ export PATH="/opt/homebrew/opt/mongodb-community@5.0/bin:$PATH"
 # --- MISE ---
 command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"
 
+# --- ZOXIDE ---
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd zsh)"
+
 # --- BREWFILE AUTOUPDATE ---
 brew() {
   command brew "$@"
