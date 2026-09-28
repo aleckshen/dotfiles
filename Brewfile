@@ -1,5 +1,6 @@
 tap "mongodb/brew", trusted: { formulae: ["mongodb-database-tools"] }
 tap "nikitabobko/tap"
+brew "btop"
 brew "fastfetch"
 brew "fd"
 brew "flyctl"

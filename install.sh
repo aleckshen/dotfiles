@@ -55,6 +55,7 @@ link "$DOTFILES/nvim" "$HOME/.config/nvim"
 link "$DOTFILES/tmux" "$HOME/.config/tmux"
 link "$DOTFILES/karabiner" "$HOME/.config/karabiner"
 link "$DOTFILES/mise" "$HOME/.config/mise"
+link "$DOTFILES/btop" "$HOME/.config/btop"
 
 # 5. Bootstrap TPM, then let it install the gitignored plugins listed in tmux.conf
 TPM_DIR="$DOTFILES/tmux/plugins/tpm"
