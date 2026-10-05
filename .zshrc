@@ -6,6 +6,9 @@ compinit
 alias v="nvim ."
 alias cc="claude --dangerously-skip-permissions"
 alias ..="cd .."
+alias gs="git status -sb"
+alias gl="git log --decorate --graph --oneline"
+alias gla="git log --all --decorate --graph --oneline"
 
 # --- POWERLEVEL10 ---
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
