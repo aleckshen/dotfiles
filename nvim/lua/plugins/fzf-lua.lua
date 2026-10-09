@@ -11,7 +11,7 @@ return {
 			desc = "FZF Files",
 		},
 		{
-			"<leader>fg",
+			"<leader>fs",
 			function()
 				require("fzf-lua").live_grep()
 			end,
