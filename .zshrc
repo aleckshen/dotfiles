@@ -2,6 +2,19 @@
 autoload -Uz compinit
 compinit
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# LS_COLORS is unset on macOS, which expands to '' here: zsh's default colours
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# --- FZF-TAB ---
+# fzf-tab replaces zsh's built-in menu, so that menu must stay off. Must load after compinit.
+FZF_TAB="/opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+if [[ -f "$FZF_TAB" ]]; then
+  source "$FZF_TAB"
+  zstyle ':completion:*' menu no
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+fi
+
 # --- FZF ---
 # Ctrl-R history, Ctrl-T files, Alt-C cd. Must come after fzf-tab so it keeps fzf-tab as the Tab fallback.
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
