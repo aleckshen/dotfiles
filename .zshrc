@@ -2,6 +2,10 @@
 autoload -Uz compinit
 compinit
 
+# --- FZF ---
+# Ctrl-R history, Ctrl-T files, Alt-C cd. Must come after fzf-tab so it keeps fzf-tab as the Tab fallback.
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
+
 # --- ALIASES ---
 alias v="nvim ."
 alias cc="claude --dangerously-skip-permissions"
