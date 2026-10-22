@@ -27,6 +27,9 @@ alias gs="git status -sb"
 alias gl="git log --decorate --graph --oneline"
 alias gla="git log --all --decorate --graph --oneline"
 
+# --- EDITOR ---
+export EDITOR="nvim"
+
 # --- POWERLEVEL10 ---
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
