@@ -1,3 +1,8 @@
 # tmux plugins are installed and updated by TPM, not tracked here.
 # install.sh bootstraps TPM itself and then has it fetch the rest.
 tmux/plugins/
+
+# written by bin/theme for the active theme
+ghostty/current-theme
+yazi/theme.toml
+btop/themes/current.theme

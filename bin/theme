@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# Switch the colour theme everywhere: `theme <name>`, or `theme -h` to list the themes.
+# Ghostty, Neovim, yazi and btop are switched here; tmux and fzf use the terminal's ANSI colours,
+# so they follow Ghostty on their own.
+set -euo pipefail
+
+DOTFILES="$HOME/dotfiles"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
+
+# a new theme needs an entry here and a branch in the case below (plus utils/theme.lua in nvim)
+themes=(nord rosepine)
+
+current=$(cat "$STATE" 2>/dev/null || echo nord)
+
+usage() {
+  echo "usage: theme <name>"
+  echo
+  echo "themes:"
+  for name in "${themes[@]}"; do
+    if [ "$name" = "$current" ]; then
+      echo "  $name (current)"
+    else
+      echo "  $name"
+    fi
+  done
+}
+
+if [ $# -ne 1 ]; then
+  usage >&2
+  exit 1
+fi
+
+theme=$1
+
+case "$theme" in
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  nord)
+    ghostty="nord"
+    yazi="nord"
+    btop="${HOMEBREW_PREFIX:-/opt/homebrew}/share/btop/themes/nord.theme"
+    ;;
+  rosepine)
+    ghostty="Rose Pine"
+    yazi="rose-pine"
+    btop="$DOTFILES/btop/themes/rose-pine.theme"
+    ;;
+  *)
+    echo "theme: unknown theme '$theme'" >&2
+    echo >&2
+    usage >&2
+    exit 1
+    ;;
+esac
+
+mkdir -p "$(dirname "$STATE")"
+echo "$theme" >"$STATE"
+
+# generated files below are gitignored, so switching never dirties the repo
+echo "theme = $ghostty" >"$DOTFILES/ghostty/current-theme"
+printf '[flavor]\ndark = "%s"\nlight = "%s"\n' "$yazi" "$yazi" >"$DOTFILES/yazi/theme.toml"
+ln -sfn "$btop" "$DOTFILES/btop/themes/current.theme"
+
+# running Neovims re-read $STATE (utils/theme.lua). Dead sockets just fail, but an instance
+# that never answers (e.g. a busy `nvim --embed`) would block forever, so each gets 2 seconds.
+for sock in "${TMPDIR:-/tmp/}"nvim."$USER"/*/nvim.*.0; do
+  [ -S "$sock" ] || continue
+  nvim --server "$sock" --remote-expr 'luaeval("require(\"utils.theme\").apply()")' >/dev/null 2>&1 &
+  pid=$!
+  (sleep 2 && kill "$pid" 2>/dev/null) &
+done
+wait
+
+echo "Switched to $theme. Reload Ghostty with Cmd-Shift-, (yazi and btop pick it up next time they open)."

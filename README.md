@@ -24,7 +24,7 @@ git clone https://github.com/aleckshen/dotfiles.git ~/dotfiles
 ~/dotfiles/install.sh
 ```
 
-That is the whole bootstrap. `install.sh` runs steps 3 to 6 below, plus the
+That is the whole bootstrap. `install.sh` runs steps 3 to 7 below, plus the
 Xcode command line tools check from step 1, and is safe to re-run — it skips
 anything already in place.
 
@@ -72,6 +72,9 @@ ln -s ~/dotfiles/karabiner ~/.config/karabiner
 ln -s ~/dotfiles/mise ~/.config/mise
 ln -s ~/dotfiles/btop ~/.config/btop
 ln -s ~/dotfiles/yazi ~/.config/yazi
+
+mkdir -p ~/.local/bin
+ln -s ~/dotfiles/bin/theme ~/.local/bin/theme
 ```
 
 5. Install the tmux plugins. They are not tracked in this repo — TPM owns them,
@@ -98,3 +101,23 @@ git clone https://github.com/aleckshen/.claude.git ~/.claude
 
 If `~/.claude` already exists, `git` will refuse to clone into it — `install.sh`
 handles that case by cloning alongside and moving `.git` into place.
+
+7. Apply the colour theme. This writes the gitignored files that Ghostty, yazi
+   and btop read for the active theme.
+
+```zsh
+theme nord
+```
+
+## Themes
+
+Everything can switch between Nord and Rosé Pine:
+
+```zsh
+theme rosepine   # or `theme nord`
+theme -h         # list the themes, marking the current one
+```
+
+Then reload Ghostty with `Cmd-Shift-,`. Neovim switches straight away (including
+open sessions), tmux and fzf follow Ghostty's colours, and yazi and btop pick it
+up the next time they open. The choice is saved in `~/.local/state/theme`.

@@ -43,7 +43,7 @@ link() {
   echo "linked $link_path -> $target"
 }
 
-mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.config" "$HOME/.local/bin"
 
 link "$DOTFILES/.zshrc" "$HOME/.zshrc"
 link "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
@@ -57,6 +57,7 @@ link "$DOTFILES/karabiner" "$HOME/.config/karabiner"
 link "$DOTFILES/mise" "$HOME/.config/mise"
 link "$DOTFILES/btop" "$HOME/.config/btop"
 link "$DOTFILES/yazi" "$HOME/.config/yazi"
+link "$DOTFILES/bin/theme" "$HOME/.local/bin/theme"
 
 # 5. Bootstrap TPM, then let it install the gitignored plugins listed in tmux.conf
 TPM_DIR="$DOTFILES/tmux/plugins/tpm"
@@ -90,5 +91,8 @@ else
   git -C "$HOME/.claude" checkout -- .
   echo "cloned $HOME/.claude"
 fi
+
+# 7. Write the gitignored per-tool theme files, keeping the saved theme on a re-run (nord on a fresh machine)
+"$DOTFILES/bin/theme" "$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/theme" 2>/dev/null || echo nord)"
 
 echo "Done."
