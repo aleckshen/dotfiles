@@ -47,5 +47,7 @@ return {
 		},
 	},
 
-	opts = {},
+	opts = {
+		winopts = { backdrop = false },
+	},
 }
