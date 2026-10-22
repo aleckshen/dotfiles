@@ -30,6 +30,17 @@ alias gla="git log --all --decorate --graph --oneline"
 # --- EDITOR ---
 export EDITOR="nvim"
 
+# --- YAZI ---
+# y opens yazi and cds into its last folder on quit (q); Q quits without changing folder.
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
 # --- POWERLEVEL10 ---
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
