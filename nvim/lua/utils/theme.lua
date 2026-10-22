@@ -32,7 +32,7 @@ M.apply = function()
 	})
 
 	require("rose-pine").setup({
-		variant = "main",
+		variant = "moon",
 		styles = { transparency = transparent },
 		-- diffs look like nord's (solid red/green fills via reverse), and diffview's
 		-- file panel matches the rest of the editor

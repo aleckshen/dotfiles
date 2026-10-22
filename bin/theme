@@ -43,7 +43,7 @@ case "$theme" in
     btop="${HOMEBREW_PREFIX:-/opt/homebrew}/share/btop/themes/nord.theme"
     ;;
   rosepine)
-    ghostty="Rose Pine"
+    ghostty="Rose Pine Moon"
     yazi="rose-pine"
     btop="$DOTFILES/btop/themes/rose-pine.theme"
     ;;

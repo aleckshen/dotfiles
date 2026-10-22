@@ -1,10 +1,10 @@
 #:schema https://yazi-rs.github.io/schemas/theme.json
 
-# Rosé Pine (main). Same layout as nord.yazi; the mode pills copy rose-pine/neovim's lualine theme.
+# Rosé Pine (moon). Same layout as nord.yazi; the mode pills copy rose-pine/neovim's lualine theme.
 #
-# base    #191724  surface #1f1d2e  overlay #26233a  muted #6e6a86  subtle #908caa  text #e0def4
-# love    #eb6f92  gold    #f6c177  rose    #ebbcba  pine  #31748f  foam   #9ccfd8  iris #c4a7e7
-# hl low  #21202e  hl med  #403d52  hl high #524f67
+# base    #232136  surface #2a273f  overlay #393552  muted #6e6a86  subtle #908caa  text #e0def4
+# love    #eb6f92  gold    #f6c177  rose    #ea9a97  pine  #3e8fb0  foam   #9ccfd8  iris #c4a7e7
+# hl low  #2a283e  hl med  #44415a  hl high #56526e
 
 [mgr]
 cwd = { fg = "#9ccfd8" }
@@ -12,30 +12,30 @@ cwd = { fg = "#9ccfd8" }
 find_keyword  = { fg = "#f6c177", bold = true, italic = true, underline = true }
 find_position = { fg = "#c4a7e7", bg = "reset", bold = true, italic = true }
 
-marker_copied   = { fg = "#31748f", bg = "#31748f" }
+marker_copied   = { fg = "#3e8fb0", bg = "#3e8fb0" }
 marker_cut      = { fg = "#eb6f92", bg = "#eb6f92" }
 marker_marked   = { fg = "#9ccfd8", bg = "#9ccfd8" }
 marker_selected = { fg = "#f6c177", bg = "#f6c177" }
 
-count_copied   = { fg = "#191724", bg = "#31748f" }
-count_cut      = { fg = "#191724", bg = "#eb6f92" }
-count_selected = { fg = "#191724", bg = "#f6c177" }
+count_copied   = { fg = "#232136", bg = "#3e8fb0" }
+count_cut      = { fg = "#232136", bg = "#eb6f92" }
+count_selected = { fg = "#232136", bg = "#f6c177" }
 
 border_symbol = "│"
 border_style  = { fg = "#6e6a86" }
 
 [tabs]
-active   = { fg = "#191724", bg = "#ebbcba", bold = true }
-inactive = { fg = "#ebbcba", bg = "#26233a" }
+active   = { fg = "#232136", bg = "#ea9a97", bold = true }
+inactive = { fg = "#ea9a97", bg = "#393552" }
 
 # lualine normal / visual / replace
 [mode]
-normal_main = { fg = "#191724", bg = "#ebbcba", bold = true }
-normal_alt  = { fg = "#ebbcba", bg = "#26233a" }
-select_main = { fg = "#191724", bg = "#c4a7e7", bold = true }
-select_alt  = { fg = "#c4a7e7", bg = "#26233a" }
-unset_main  = { fg = "#191724", bg = "#31748f", bold = true }
-unset_alt   = { fg = "#31748f", bg = "#26233a" }
+normal_main = { fg = "#232136", bg = "#ea9a97", bold = true }
+normal_alt  = { fg = "#ea9a97", bg = "#393552" }
+select_main = { fg = "#232136", bg = "#c4a7e7", bold = true }
+select_alt  = { fg = "#c4a7e7", bg = "#393552" }
+unset_main  = { fg = "#232136", bg = "#3e8fb0", bold = true }
+unset_alt   = { fg = "#3e8fb0", bg = "#393552" }
 
 [indicator]
 parent  = { reversed = true }
@@ -47,11 +47,11 @@ perm_sep   = { fg = "#6e6a86" }
 perm_type  = { fg = "#9ccfd8" }
 perm_read  = { fg = "#f6c177" }
 perm_write = { fg = "#eb6f92" }
-perm_exec  = { fg = "#31748f" }
+perm_exec  = { fg = "#3e8fb0" }
 
 progress_label  = { fg = "#e0def4", bold = true }
-progress_normal = { fg = "#9ccfd8", bg = "#403d52" }
-progress_error  = { fg = "#eb6f92", bg = "#403d52" }
+progress_normal = { fg = "#9ccfd8", bg = "#44415a" }
+progress_error  = { fg = "#eb6f92", bg = "#44415a" }
 
 [pick]
 border   = { fg = "#9ccfd8" }
@@ -73,12 +73,12 @@ title   = { fg = "#e0def4" }
 hovered = { fg = "#c4a7e7", underline = true }
 
 [which]
-mask            = { bg = "#26233a" }
+mask            = { bg = "#393552" }
 cand            = { fg = "#9ccfd8" }
 rest            = { fg = "#6e6a86" }
 desc            = { fg = "#c4a7e7" }
 separator       = "  "
-separator_style = { fg = "#403d52" }
+separator_style = { fg = "#44415a" }
 
 [help]
 chord   = { fg = "#9ccfd8" }
@@ -95,7 +95,7 @@ rules = [
 	{ mime = "**/image/*", fg = "#9ccfd8" },
 	{ mime = "**/{audio,video}/*", fg = "#f6c177" },
 	{ mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#c4a7e7" },
-	{ mime = "**/application/{pdf,doc,rtf,odt,docx,xlsx,pptx}", fg = "#31748f" },
+	{ mime = "**/application/{pdf,doc,rtf,odt,docx,xlsx,pptx}", fg = "#3e8fb0" },
 	{ url = "*", is = "link", fg = "#c4a7e7" },
 	{ url = "*", fg = "#e0def4" },
 	{ url = "*/", fg = "#9ccfd8", bold = true },
