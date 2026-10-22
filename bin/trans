@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Toggle transparency: Ghostty's window background, plus Neovim's editor, floats and menus.
+# tmux, yazi, fzf and btop draw no background of their own, so they follow Ghostty.
+set -euo pipefail
+
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/transparency"
+
+current=$(cat "$STATE" 2>/dev/null || echo on)
+[ "$current" = on ] && next=off || next=on
+
+mkdir -p "$(dirname "$STATE")"
+echo "$next" >"$STATE"
+
+# toggle_background_opacity flips each window rather than setting a value, so windows opened
+# since the last toggle (which start transparent, per ghostty/config) can end up out of step
+osascript >/dev/null <<'EOF'
+tell application "Ghostty"
+  repeat with w in windows
+    perform action "toggle_background_opacity" on focused terminal of selected tab of w
+  end repeat
+end tell
+EOF
+
+# running Neovims re-read $STATE (utils/theme.lua). Dead sockets just fail, but an instance
+# that never answers (e.g. a busy `nvim --embed`) would block forever, so each gets 2 seconds.
+for sock in "${TMPDIR:-/tmp/}"nvim."$USER"/*/nvim.*.0; do
+  [ -S "$sock" ] || continue
+  nvim --server "$sock" --remote-expr 'luaeval("require(\"utils.theme\").apply()")' >/dev/null 2>&1 &
+  pid=$!
+  (sleep 2 && kill "$pid" 2>/dev/null) &
+done
+wait
+
+echo "Transparency $next."

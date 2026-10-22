@@ -58,6 +58,7 @@ link "$DOTFILES/mise" "$HOME/.config/mise"
 link "$DOTFILES/btop" "$HOME/.config/btop"
 link "$DOTFILES/yazi" "$HOME/.config/yazi"
 link "$DOTFILES/bin/theme" "$HOME/.local/bin/theme"
+link "$DOTFILES/bin/trans" "$HOME/.local/bin/trans"
 
 # 5. Bootstrap TPM, then let it install the gitignored plugins listed in tmux.conf
 TPM_DIR="$DOTFILES/tmux/plugins/tpm"

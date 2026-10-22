@@ -75,6 +75,7 @@ ln -s ~/dotfiles/yazi ~/.config/yazi
 
 mkdir -p ~/.local/bin
 ln -s ~/dotfiles/bin/theme ~/.local/bin/theme
+ln -s ~/dotfiles/bin/trans ~/.local/bin/trans
 ```
 
 5. Install the tmux plugins. They are not tracked in this repo — TPM owns them,
@@ -108,16 +109,3 @@ handles that case by cloning alongside and moving `.git` into place.
 ```zsh
 theme nord
 ```
-
-## Themes
-
-Everything can switch between Nord and Rosé Pine:
-
-```zsh
-theme rosepine   # or `theme nord`
-theme -h         # list the themes, marking the current one
-```
-
-Then reload Ghostty with `Cmd-Shift-,`. Neovim switches straight away (including
-open sessions), tmux and fzf follow Ghostty's colours, and yazi and btop pick it
-up the next time they open. The choice is saved in `~/.local/state/theme`.

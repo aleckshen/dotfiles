@@ -4,13 +4,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("nord").setup({
-				-- optional settings
-				transparent = true,
-				terminal_colors = true,
-			})
-
-			-- the colorscheme itself is picked by utils.theme
+			-- setup() and the colorscheme itself are handled by utils.theme
 			-- nord.nvim's transparent option skips floating windows,
 			-- notifications, and the cmp completion popup (Pmenu - nvim-cmp's
 			-- default winhighlight points both the popup body and its border
@@ -22,6 +16,9 @@ return {
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				pattern = "nord",
 				callback = function()
+					if not require("utils.theme").transparent() then
+						return
+					end
 					for _, group in ipairs({ "NormalFloat", "FloatBorder", "FloatTitle", "NotifyBackground", "Pmenu" }) do
 						local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
 						hl.bg = nil
