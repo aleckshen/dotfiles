@@ -41,6 +41,12 @@ function y() {
     rm -f -- "$tmp"
 }
 
+# --- CURSOR ---
+# TUIs like yazi leave a steady block cursor on exit, and inside tmux Ghostty's shell
+# integration can't reset it, so restore the terminal's default cursor at each prompt.
+_reset_cursor() { printf '\e[0 q' }
+[[ -n $TMUX ]] && precmd_functions+=(_reset_cursor)
+
 # --- POWERLEVEL10 ---
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
