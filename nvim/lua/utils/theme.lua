@@ -49,6 +49,36 @@ M.apply = function()
 	})
 
 	vim.cmd.colorscheme(colorschemes[read_state("theme")] or "nord")
+
+	-- a terminal cell can't be part-filled, so a border with a background fills square corners
+	-- behind the rounded glyphs; without one, filled floats (solid mode) still look rounded
+	for name in pairs(vim.api.nvim_get_hl(0, {})) do
+		if name:find("Border") then
+			local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+			if hl.bg then
+				hl.bg = nil
+				vim.api.nvim_set_hl(0, name, hl)
+			end
+		end
+	end
+
+	-- unfilled border cells leave a strip between the line and a filled float, so in solid
+	-- mode floats take the editor's background and show as just the rounded outline,
+	-- like they do when transparent
+	if not transparent then
+		local editor_bg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg
+		for name in pairs(vim.api.nvim_get_hl(0, {})) do
+			local float = name ~= "Normal" and name:find("Normal$")
+				or vim.tbl_contains({ "NormalFloat", "FloatTitle", "Pmenu", "NotifyBackground" }, name)
+			if float then
+				local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+				if hl.bg and hl.bg ~= editor_bg then
+					hl.bg = editor_bg
+					vim.api.nvim_set_hl(0, name, hl)
+				end
+			end
+		end
+	end
 end
 
 return M
