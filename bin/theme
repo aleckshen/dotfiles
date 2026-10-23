@@ -2,12 +2,24 @@
 # Switch the colour theme everywhere: `theme <name>`, or `theme -h` to list the themes.
 # Ghostty, Neovim, yazi and btop are switched here; tmux and fzf use the terminal's ANSI colours,
 # so they follow Ghostty on their own.
+#
+# Adding a theme (say `gruvbox`):
+#   1. Here: add it to `themes` below and a branch to the case statement setting
+#        ghostty - a theme Ghostty ships (`ghostty +list-themes`) or a file in ghostty/themes/
+#        yazi    - a flavor folder, yazi/flavors/<name>.yazi/ with flavor.toml (UI colours) and
+#                  tmtheme.xml (code preview colours); copy nord.yazi and swap the colours.
+#                  Avoid italics in either, tmux draws them as inverted colours
+#        btop    - a .theme file: btop's bundled ones are in $(brew --prefix)/share/btop/themes,
+#                  otherwise add one to btop/themes/ (rose-pine.theme shows the keys)
+#   2. nvim/lua/utils/theme.lua: map the name to a colorscheme in `colorschemes`. If the
+#      colorscheme is a new plugin, add its spec to nvim/lua/plugins/ (lazy = false, no setup)
+#      and call its setup() in M.apply(), passing `transparent` to its transparency option
+#   3. Nothing for tmux or fzf; check them after switching, since they use the Ghostty palette
 set -euo pipefail
 
 DOTFILES="$HOME/dotfiles"
 STATE="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 
-# a new theme needs an entry here and a branch in the case below (plus utils/theme.lua in nvim)
 themes=(nord rosepine)
 
 current=$(cat "$STATE" 2>/dev/null || echo nord)
