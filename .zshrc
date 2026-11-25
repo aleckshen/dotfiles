@@ -94,3 +94,6 @@ brew() {
 
 # --- LOCAL USER BIN ---
 export PATH="$HOME/.local/bin:$PATH"
+
+# --- MACHINE-LOCAL OVERRIDES (untracked) ---
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
