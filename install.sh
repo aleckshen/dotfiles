@@ -71,11 +71,14 @@ else
   git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
 fi
 
-# install_plugins reads TMUX_PLUGIN_MANAGER_PATH from a tmux server, so start one and source the config first
+# install_plugins reads TMUX_PLUGIN_MANAGER_PATH from a tmux server, so it needs one running with the config loaded.
+# A bare `tmux start-server` exits immediately with no sessions, so hold it open with a throwaway detached session.
 echo "Installing tmux plugins..."
-tmux start-server
+TMUX_INSTALL_SESSION="dotfiles-install-$$"
+tmux new-session -d -s "$TMUX_INSTALL_SESSION"
 tmux source-file "$HOME/.config/tmux/tmux.conf"
 "$TPM_DIR/bin/install_plugins"
+tmux kill-session -t "$TMUX_INSTALL_SESSION"
 
 # 6. Claude Code config lives in its own repo, cloned in place since ~/.claude is mostly untracked runtime state
 CLAUDE_REPO="https://github.com/aleckshen/.claude.git"
