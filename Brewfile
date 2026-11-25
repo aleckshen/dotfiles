@@ -17,7 +17,7 @@ brew "ripgrep"
 brew "tmux"
 brew "tree"
 brew "zoxide"
-brew "mongodb/brew/mongodb-community@5.0", trusted: true
+brew "mongodb/brew/mongodb-community", trusted: true
 cask "nikitabobko/tap/aerospace", trusted: true
 cask "docker-desktop"
 cask "dotnet-sdk"
