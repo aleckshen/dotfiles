@@ -62,7 +62,7 @@ brew bundle --file ~/dotfiles/Brewfile
 ```zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.p10k.zsh ~/.p10k.zsh
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/git ~/.config/git
 ln -s ~/dotfiles/aerospace ~/.config/aerospace
 ln -s ~/dotfiles/wezterm ~/.config/wezterm
 ln -s ~/dotfiles/ghostty ~/.config/ghostty

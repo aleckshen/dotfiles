@@ -5,7 +5,5 @@
 	defaultBranch = main
 [pull]
 	rebase = false
-[core]
-	excludesfile = ~/.gitignore_global
 [include]
 	path = ~/.gitconfig.local
